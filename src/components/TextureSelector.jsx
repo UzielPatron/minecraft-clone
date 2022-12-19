@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react'
-import * as images from '../images/images.js'
+import {
+  dirtImg,
+  grassImg,
+  glassImg,
+  woodImg,
+  logImg
+} from '../images/images.js'
 import { useStore } from '../hooks/useStore.js'
 import { useKeyboard } from '../hooks/useKeyboard.js'
 
+const images = [dirtImg, grassImg, glassImg, woodImg, logImg]
+
 export const TextureSelector = () => {
-  const [visible, setVisible] = useState(true)
   const [texture, setTexture] = useStore(state => [state.texture, state.setTexture])
 
   const {
@@ -34,8 +41,6 @@ export const TextureSelector = () => {
     }
   }, [dirt, grass, glass, wood, log])
 
-  if (!visible) return null
-
   return (
     <div className='texture-selector'>
       {
@@ -43,7 +48,7 @@ export const TextureSelector = () => {
           .entries(images)
           .map(([imgKey, img]) => (
             <img
-              className={texture === imgKey.replace('Img', '') ? 'selected' : ''}
+              className={texture === imgName(img) ? 'selected' : ''}
               key={imgKey}
               src={img}
               alt={imgKey}
@@ -53,3 +58,5 @@ export const TextureSelector = () => {
     </div>
   )
 }
+
+const imgName = (name) => name.replace('/src/images/', '').replace('.jpg', '').replace('.png', '')

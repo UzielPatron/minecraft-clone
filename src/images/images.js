@@ -6,8 +6,8 @@ import woodImg from './wood.png'
 
 export {
   dirtImg,
-  glassImg,
   grassImg,
-  logImg,
-  woodImg
+  glassImg,
+  woodImg,
+  logImg
 }
